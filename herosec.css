@@ -19,6 +19,7 @@ body{
 
 .content{
     width:50%;
+     text-align:left;
 }
 
 .content h1{
@@ -53,6 +54,6 @@ button{
 }
 
 .image img{
-    width:400px;
-    border-radius:20px;
+    width:800px;
+    border-radius:16px;
 }
