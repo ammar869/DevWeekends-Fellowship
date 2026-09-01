@@ -3,16 +3,39 @@
 //     resolve(123);
 // });
 
-function getData(dataId, getNextData) {
-  return new Promise((resolve, reject) => {
+
+// -------------------promise chaining-------------------
+// function getData(dataId, getNextData) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       console.log("data", dataId);
+
+//       if (getNextData) {
+//         getNextData();
+//       }
+
+//       resolve("Success");
+//     }, 5000);
+//   });
+// }
+
+function getData() {
+  return new Promise((resolve) => {
     setTimeout(() => {
-      console.log("data", dataId);
-
-      if (getNextData) {
-        getNextData();
-      }
-
-      resolve("Success");
-    }, 5000);
+      console.log("Data received");
+      resolve();
+    }, 3000);
   });
 }
+
+async function myFunction() {
+  console.log("1. Start");
+
+  await getData();
+
+  console.log("3. Finished");
+}
+
+myFunction();
+
+console.log("2. Other code");
