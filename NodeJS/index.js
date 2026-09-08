@@ -6,13 +6,13 @@ const server = http.createServer((req, res) => {
     console.log("Server is running");
 
     if(req.url === '/favicon.ico') {
-        console.log();
+        return res.end();
     }
     const log = `${Date.now()}:${req.url} New Request recieved\n`
 
     // this code was used to handle different routes but we are not using it now because we are using the same server for all the requests
     // but ab ye older code he, ham isey mhi use karen gey ... 
-    // q kh agar query parameter ma koi cheez a gaey to ye kam nhi karey ga 
+    // q kh agar url ma  query parameter ma koi cheez a gaey to ye kam nhi karey ga 
 
     // switch(req.url){
     //     case '/':res.end("Home page ");
