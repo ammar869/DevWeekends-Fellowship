@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "name": "Ali Khan",
+    "age": 22,
+    "city": "Islamabad",
+    "occupation": "Software Engineer"
+  },
+  {
+    "id": 2,
+    "name": "Sara Ahmed",
+    "age": 25,
+    "city": "Lahore",
+    "occupation": "Graphic Designer"
+  },
+  {
+    "id": 3,
+    "name": "Hamza Malik",
+    "age": 29,
+    "city": "Karachi",
+    "occupation": "Accountant"
+  },
+  {
+    "id": 4,
+    "name": "Ayesha Noor",
+    "age": 21,
+    "city": "Rawalpindi",
+    "occupation": "Student"
+  },
+  {
+    "id": 5,
+    "name": "Usman Raza",
+    "age": 34,
+    "city": "Faisalabad",
+    "occupation": "Businessman"
+  },
+  {
+    "id": 6,
+    "name": "Hira Shah",
+    "age": 27,
+    "city": "Multan",
+    "occupation": "Teacher"
+  },
+  {
+    "id": 7,
+    "name": "Bilal Ahmed",
+    "age": 31,
+    "city": "Peshawar",
+    "occupation": "Doctor"
+  },
+  {
+    "id": 8,
+    "name": "Maham Iqbal",
+    "age": 24,
+    "city": "Islamabad",
+    "occupation": "Content Writer"
+  },
+  {
+    "id": 9,
+    "name": "Danish Ali",
+    "age": 28,
+    "city": "Sialkot",
+    "occupation": "Web Developer"
+  },
+  {
+    "id": 10,
+    "name": "Zoya Hassan",
+    "age": 23,
+    "city": "Lahore",
+    "occupation": "UI Designer"
+  },
+  {
+    "id": 11,
+    "name": "Saad Farooq",
+    "age": 36,
+    "city": "Karachi",
+    "occupation": "Manager"
+  },
+  {
+    "id": 12,
+    "name": "Iqra Tariq",
+    "age": 26,
+    "city": "Gujranwala",
+    "occupation": "HR Officer"
+  },
+  {
+    "id": 13,
+    "name": "Ahmed Hassan",
+    "age": 30,
+    "city": "Rawalpindi",
+    "occupation": "Data Analyst"
+  },
+  {
+    "id": 14,
+    "name": "Laiba Aslam",
+    "age": 20,
+    "city": "Multan",
+    "occupation": "Student"
+  },
+  {
+    "id": 15,
+    "name": "Fahad Qureshi",
+    "age": 33,
+    "city": "Islamabad",
+    "occupation": "Civil Engineer"
+  },
+  {
+    "id": 16,
+    "name": "Misha Khan",
+    "age": 29,
+    "city": "Sargodha",
+    "occupation": "Marketing Specialist"
+  },
+  {
+    "id": 17,
+    "name": "Talha Saeed",
+    "age": 27,
+    "city": "Peshawar",
+    "occupation": "Photographer"
+  },
+  {
+    "id": 18,
+    "name": "Anaya Rauf",
+    "age": 32,
+    "city": "Lahore",
+    "occupation": "Architect"
+  },
+  {
+    "id": 19,
+    "name": "Omer Siddiqui",
+    "age": 35,
+    "city": "Faisalabad",
+    "occupation": "Banker"
+  },
+  {
+    "id": 20,
+    "name": "Mehwish Zahid",
+    "age": 24,
+    "city": "Sialkot",
+    "occupation": "Software Developer"
+  }
+]
