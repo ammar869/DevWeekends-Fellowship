@@ -4,9 +4,9 @@ const app = express();
 const fs = require('fs');
 // instance is created 
 const PORT = 8000;
-
 //app.get(URL, FUNCTION)
 app.get('/api/users',(req,res)=>{
+   res.setHeader("myName ", "Ammar ");
    return res.json(users);
 });
 
@@ -26,9 +26,9 @@ app.get('/users/:id',(req, res) => {
 }
    );
 
-app.post('/api/users/:id', (req,res)=>{
-   return res.json({message: "POST request received"});
-})
+// app.post('/api/users/:id', (req,res)=>{
+//    return res.json({message: "POST request received"});
+// })
 
 app.patch('/api/users/:id', (req,res)=>{
    return res.json({message: "Updated"});
@@ -38,18 +38,21 @@ app.delete('/api/users/:id', (req,res)=>{
    return res.json({message: "deleted"});
 })
 
-app.post('/api/users/:id', (req,res)=>{
-      const body = res.body;
+app.post('/api/users/', (req,res)=>{
+      const body = req.body;
       users.push({...body,id:users.length + 1});
-      fs.writeFile('./MOCK_DATA.json', JSON.stringify(body), (err) => {
-         if (err) {
-            return req.status(500).json({ message: 'Error writing to file' });
-         }
+      fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err,data) => {
+        
          return res.status(201).json({ message: 'User added successfully' });
       });
       
 });
+// Middle Ware
 
+app.use((req,res,next)=>{
+   console.log("Middle ware is called");
+   next();
+})
    //--------------Grouping -----------------------
 //We can group all of these requests how ?
 //like we can merge all of these requests having the same URL into a single request 
