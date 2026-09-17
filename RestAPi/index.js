@@ -1,6 +1,7 @@
 const express = require('express');
 const users = require('./MOCK_DATA.json');
 const app = express();
+const fs = require('fs');
 // instance is created 
 const PORT = 8000;
 
@@ -37,6 +38,17 @@ app.delete('/api/users/:id', (req,res)=>{
    return res.json({message: "deleted"});
 })
 
+app.post('/api/users/:id', (req,res)=>{
+      const body = res.body;
+      users.push({...body,id:users.length + 1});
+      fs.writeFile('./MOCK_DATA.json', JSON.stringify(body), (err) => {
+         if (err) {
+            return req.status(500).json({ message: 'Error writing to file' });
+         }
+         return res.status(201).json({ message: 'User added successfully' });
+      });
+      
+});
 
    //--------------Grouping -----------------------
 //We can group all of these requests how ?
