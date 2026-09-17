@@ -3,6 +3,29 @@ const users = require('./MOCK_DATA.json');
 const app = express();
 // instance is created 
 const PORT = 8000;
+
+//app.get(URL, FUNCTION)
+app.get('/api/users',(req,res)=>{
+   return res.json(users);
+});
+
+app.get('/users', (req, res) => {
+   const html = `<ul>
+      ${users.map((user) => `<li>${user.name}</li>`).join("")}
+   </ul>`;
+
+   return res.send(html);
+});
+
+
+app.get('/users/:id',(req, res) => {
+   const id = Number(req.params.id);
+   const user = users.find((user) => user.id === id);
+   return res.json(user);
+}
+   );
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
