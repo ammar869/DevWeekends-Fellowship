@@ -11,3 +11,10 @@ we donot dynamically do this , to write one by one
 so we will write the 
 localhost/api/users/:id ----> we call this dynamic path  parameters
 this is the feature of the express
+
+<ul>
+   ${users.map((user)=>{`<li>${user.name}</li>`)}
+</ul>
+
+--------------Grouping -----------------------
+We can group all of these requests how ?
