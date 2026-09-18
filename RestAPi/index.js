@@ -7,6 +7,11 @@ const fs = require('fs');
 const PORT = 8000;
 
 // Now connection with the mongodb
+// Now we will connect to the database
+mongoose.connect(' mongodb://127.0.0.1:27017/firstDB')
+.then(()=>{console.log("Connected to the database")})
+.catch((err)=>{console.error("Error connecting to the database", err)});
+
 
 // making the schema
 const newSchema = new mongoose.Schema({firstname: {type:String,required:true},lastname:{type:String},email:{type:String, unique:true,},gender:{type:String,enum:["Male","Female"]},
@@ -14,11 +19,6 @@ const newSchema = new mongoose.Schema({firstname: {type:String,required:true},la
 });
 //Now we will create the model
 const User = mongoose.model('User', newSchema);
-
-// Now we will connect to the database
-moongose.connect(' mongodb://127.0.0.1:27017/firstDB')
-.then(()=>{console.log("Connected to the database")})
-.catch((err)=>{console.error("Error connecting to the database", err)});
 
 
 
