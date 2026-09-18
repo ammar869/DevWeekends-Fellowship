@@ -1,9 +1,22 @@
 const express = require('express');
 const users = require('./MOCK_DATA.json');
 const app = express();
+const mongooe = require('mongoose');
 const fs = require('fs');
 // instance is created 
 const PORT = 8000;
+
+// Now connection with the mongodb
+
+// making the schema
+const newSchema = new mongoose.Schema({firstname: {type:String,required:true},lastname:{type:String},email:{type:String, unique:true,},gender:{type:String,enum:["Male","Female"]},
+   jobTitle: {type:String}
+});
+//Now we will create the model
+
+
+
+
 //app.get(URL, FUNCTION)
 app.get('/api/users',(req,res)=>{
    res.setHeader("myName ", "Ammar ");
