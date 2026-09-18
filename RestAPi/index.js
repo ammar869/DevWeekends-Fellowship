@@ -13,7 +13,12 @@ const newSchema = new mongoose.Schema({firstname: {type:String,required:true},la
    jobTitle: {type:String}
 });
 //Now we will create the model
+const User = mongoose.model('User', newSchema);
 
+// Now we will connect to the database
+moongose.connect(' mongodb://127.0.0.1:27017/firstDB')
+.then(()=>{console.log("Connected to the database")})
+.catch((err)=>{console.error("Error connecting to the database", err)});
 
 
 
