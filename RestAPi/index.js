@@ -1,53 +1,23 @@
 const express = require('express');
-// const users = require('./MOCK_DATA.json');
 const app = express();
-const mongoose = require('mongoose');
 const fs = require('fs');
-// instance is created 
+// const mongoose = require('mongoose');
+const{connectMongodb} = require('./connection.js')
+const{logReqRes} = require("./middleware")
+const userRouter = require('./routes/user.js')
+
+ connectMongodb("mongodb://127.0.0.1:27017/firstDB");
+ app.use(logReqRes("log.txt"))
+// instance is created  
 const PORT = 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// Now connection with the mongodb
-// Now we will connect to the database
-mongoose.connect("mongodb://127.0.0.1:27017/firstDB")
-.then(()=>{console.log("Connected to the database")})
-.catch((err)=>{console.error("Error connecting to the database", err)});
 
-
-
-
-
-// app.post("/api/users", async (req, res) => {
-// const body = req.body;
-// if(
-// ! body ||
-// ! body.firstname ||
-// ! body.lastname ||
-// ! body.email ||
-// ! body.gender ||
-// ! body.jobTitle
-// ){
-// return res.status(400).json({ msg: "All fields are req ... " });
-
-// }
-
-
-// // here instead of pushing the data into the array we will save it to the database
-// //here User is the that one model that we have created and create is the method that will save the data to the database
-// const result = await User.create({ firstname: body.firstname, lastname: body.lastname, email: body.email, gender: body.gender, jobTitle: body.jobTitle })
-
-// console.log(result);
-//  return res.status(201).json({ msg: "User added successfully", data: result });
-// });
- 
-
-
+app.use("/users", userRouter);
 // Middle Ware
 
-app.use((req,res,next)=>{
-   console.log("Middle ware is called");
-   next();
-})
+
+
    //--------------Grouping -----------------------
 //We can group all of these requests how ?
 //like we can merge all of these requests having the same URL into a single request 
@@ -69,6 +39,9 @@ app.use((req,res,next)=>{
 //    return res.json({message: "deleted"});
 // });
 
+
+
+// is ka mtlb ye ho ga kh jb user "/" type kaarey ga wo automatically /user ko bhi use karey ga 
 
 
 app.listen(PORT, () => {

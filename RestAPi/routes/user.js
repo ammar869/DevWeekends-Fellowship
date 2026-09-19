@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router
 
 // Ma ne ik seperate router bnaya or os ke opr apney routes regestered kar diey
-
+//we will replace /users/api with the / 
 // Now we will do that
 router.post("/", async (req, res) => {
 
