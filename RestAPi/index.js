@@ -98,11 +98,16 @@ app.get('/users', async(req, res) => {
 
    return res.send(html);
 });
-app.patch('api/users/:id', async(req, res) => {
-   await User.findByIDAndUpdate(req.params.id,{email:"changed"});
+app.patch('/api/users/:id', async(req, res) => {
+   await User.findByIdAndUpdate(req.params.id,{email:"changed"});
    return res.json({message: "Updated"});
 });
 
+app.delete('/api/users/:id', async(req, res) => {
+   await User.findByIdAndDelete(req.params.id);
+   return res.json({message: "deleted"});
+
+});
 // app.get('/users', (req, res) => {
 //    const html = `<ul>
 //       ${users.map((user) => `<li>${user.name}</li>`).join("")}
