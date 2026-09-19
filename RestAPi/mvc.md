@@ -7,3 +7,7 @@ now we have to put the routes in teh routes folder
 
 instad of app.get,del /........
 we will use the router 
+
+and in that 
+
+we will replace /users/api with the / 

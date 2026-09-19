@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router
 
-router.post("/api/users", async (req, res) => {
+// Ma ne ik seperate router bnaya or os ke opr apney routes regestered kar diey
+
+// Now we will do that
+router.post("/", async (req, res) => {
 
     console.log("BODY RECEIVED:", req.body);
 
@@ -47,21 +50,21 @@ router.post("/api/users", async (req, res) => {
 // });
 
 
-router.get('/users', async(req, res) => {
-   const users = await User.find({}); /// this will return all the users from the database
-   const html = `<ul>
-      ${users.map((user) => `<li>${user.firstname}</li>`).join("")}
-   </ul>`;
+// router.get('/users', async(req, res) => {
+//    const users = await User.find({}); /// this will return all the users from the database
+//    const html = `<ul>
+//       ${users.map((user) => `<li>${user.firstname}</li>`).join("")}
+//    </ul>`;
 
-   return res.send(html);
-});
+//    return res.send(html);
+// });
 
-router.patch('/api/users/:id', async(req, res) => {
+router.patch('/:id', async(req, res) => {
    await User.findByIdAndUpdate(req.params.id,{email:"changed"});
    return res.json({message: "Updated"});
 });
 
-router.delete('/api/users/:id', async(req, res) => {
+router.delete('/:id', async(req, res) => {
    await User.findByIdAndDelete(req.params.id);
    return res.json({message: "deleted"});
 
@@ -76,7 +79,7 @@ router.delete('/api/users/:id', async(req, res) => {
 
 
 
-router.get('/users/:id',(req, res) => {
+router.get('/',(req, res) => {
    const id = Number(req.params.id);
    const user = users.find((user) => user.id === id);
    return res.json(user);
@@ -87,11 +90,11 @@ router.get('/users/:id',(req, res) => {
 //    return res.json({message: "POST request received"});
 // })
 
-router.patch('/api/users/:id', (req,res)=>{
+router.patch('/', (req,res)=>{
    return res.json({message: "Updated"});
 })
 
-router.delete('/api/users/:id', (req,res)=>{
+router.delete('/', (req,res)=>{
    return res.json({message: "deleted"});
 })
 
