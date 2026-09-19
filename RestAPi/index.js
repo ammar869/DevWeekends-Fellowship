@@ -1,14 +1,15 @@
 const express = require('express');
-const users = require('./MOCK_DATA.json');
+// const users = require('./MOCK_DATA.json');
 const app = express();
-const mongooe = require('mongoose');
+const mongoose = require('mongoose');
 const fs = require('fs');
 // instance is created 
 const PORT = 8000;
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // Now connection with the mongodb
 // Now we will connect to the database
-mongoose.connect(' mongodb://127.0.0.1:27017/firstDB')
+mongoose.connect("mongodb://127.0.0.1:27017/firstDB")
 .then(()=>{console.log("Connected to the database")})
 .catch((err)=>{console.error("Error connecting to the database", err)});
 
@@ -20,6 +21,67 @@ const newSchema = new mongoose.Schema({firstname: {type:String,required:true},la
 //Now we will create the model
 const User = mongoose.model('User', newSchema);
 
+// app.post("/api/users", async (req, res) => {
+// const body = req.body;
+// if(
+// ! body ||
+// ! body.firstname ||
+// ! body.lastname ||
+// ! body.email ||
+// ! body.gender ||
+// ! body.jobTitle
+// ){
+// return res.status(400).json({ msg: "All fields are req ... " });
+
+// }
+
+
+// // here instead of pushing the data into the array we will save it to the database
+// //here User is the that one model that we have created and create is the method that will save the data to the database
+// const result = await User.create({ firstname: body.firstname, lastname: body.lastname, email: body.email, gender: body.gender, jobTitle: body.jobTitle })
+
+// console.log(result);
+//  return res.status(201).json({ msg: "User added successfully", data: result });
+// });
+ 
+
+app.post("/api/users", async (req, res) => {
+
+    console.log("BODY RECEIVED:", req.body);
+
+    const body = req.body;
+
+    if (
+        !body ||
+        !body.firstname||
+        !body.lastname||
+        !body.email||
+        !body.gender||
+        !body.jobTitle
+    ) {
+        console.log("VALIDATION FAILED");
+
+        return res.status(400).json({
+            msg: "All fields are required",
+            received: body
+        });
+    }
+
+    const result = await User.create({
+        firstname: body.firstname,
+        lastname: body.lastname,
+        email: body.email,
+        gender: body.gender,
+        jobTitle: body.jobTitle
+    });
+
+    console.log("RESULT:", result);
+
+    return res.status(201).json({
+        msg: "User added successfully",
+        data: result
+    });
+});
 
 
 //app.get(URL, FUNCTION)
@@ -28,13 +90,27 @@ app.get('/api/users',(req,res)=>{
    return res.json(users);
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', async(req, res) => {
+   const users = await User.find({}); /// this will return all the users from the database
    const html = `<ul>
-      ${users.map((user) => `<li>${user.name}</li>`).join("")}
+      ${users.map((user) => `<li>${user.firstname}</li>`).join("")}
    </ul>`;
 
    return res.send(html);
 });
+app.patch('api/users/:id', async(req, res) => {
+   await User.findByIDAndUpdate(req.params.id,{email:"changed"});
+   return res.json({message: "Updated"});
+});
+
+// app.get('/users', (req, res) => {
+//    const html = `<ul>
+//       ${users.map((user) => `<li>${user.name}</li>`).join("")}
+//    </ul>`;
+
+//    return res.send(html);
+// });
+
 
 
 app.get('/users/:id',(req, res) => {
@@ -56,15 +132,15 @@ app.delete('/api/users/:id', (req,res)=>{
    return res.json({message: "deleted"});
 })
 
-app.post('/api/users/', (req,res)=>{
-      const body = req.body;
-      users.push({...body,id:users.length + 1});
-      fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err,data) => {
+// app.post('/api/users/', (req,res)=>{
+//       const body = req.body;
+//       users.push({...body,id:users.length + 1});
+//       fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err,data) => {
         
-         return res.status(201).json({ message: 'User added successfully' });
-      });
+//          return res.status(201).json({ message: 'User added successfully' });
+//       });
       
-});
+// });
 // Middle Ware
 
 app.use((req,res,next)=>{
