@@ -1,47 +1,82 @@
 const express = require('express')
+const { handleGetAllUsers, getUserById, handleUpdateUserById, handleDeleteById, handleCreateNewUser} = require("../controller")
+
 const router = express.Router
+
 
 // Ma ne ik seperate router bnaya or os ke opr apney routes regestered kar diey
 //we will replace /users/api with the / 
 // Now we will do that
-router.post("/", async (req, res) => {
 
-    console.log("BODY RECEIVED:", req.body);
+// instead of having all in  the single file we will now put the controller seperae and make the functions of it inthe controller file and then put that function in this 
+router.get("/", handleGetAllUsers)
 
-    const body = req.body;
+// Now this function, Get user by ID 
 
-    if (
-        !body ||
-        !body.firstname||
-        !body.lastname||
-        !body.email||
-        !body.gender||
-        !body.jobTitle
-    ) {
-        console.log("VALIDATION FAILED");
+// router.get('/',(req, res) => {
+//    const id = Number(req.params.id);
+//    const user = users.find((user) => user.id === id);
+//    return res.json(user);
+// }
+//    );
 
-        return res.status(400).json({
-            msg: "All fields are required",
-            received: body
-        });
-    }
+router.get("/:id", getUserById)
 
-    const result = await User.create({
-        firstname: body.firstname,
-        lastname: body.lastname,
-        email: body.email,
-        gender: body.gender,
-        jobTitle: body.jobTitle
-    });
+// router.patch('/:id', async(req, res) => {
+//    await User.findByIdAndUpdate(req.params.id,{email:"changed"});
+//    return res.json({message: "Updated"});
+// });
 
-    console.log("RESULT:", result);
+router.patch('/:id',handleUpdateUserById)
 
-    return res.status(201).json({
-        msg: "User added successfully",
-        data: result
-    });
-});
+// router.delete('/:id', async(req, res) => {
+//    await User.findByIdAndDelete(req.params.id);
+//    return res.json({message: "deleted"});
 
+// });
+
+
+router.delete('/:id',handleDeleteUserById)
+
+// router.post("/", async (req, res) => {
+
+//     console.log("BODY RECEIVED:", req.body);
+
+//     const body = req.body;
+
+//     if (
+//         !body ||
+//         !body.firstname||
+//         !body.lastname||
+//         !body.email||
+//         !body.gender||
+//         !body.jobTitle
+//     ) {
+//         console.log("VALIDATION FAILED");
+
+//         return res.status(400).json({
+//             msg: "All fields are required",
+//             received: body
+//         });
+//     }
+
+//     const result = await User.create({
+//         firstname: body.firstname,
+//         lastname: body.lastname,
+//         email: body.email,
+//         gender: body.gender,
+//         jobTitle: body.jobTitle
+//     });
+
+//     console.log("RESULT:", result);
+
+//     return res.status(201).json({
+//         msg: "User added successfully",
+//         data: result
+//     });
+// });
+
+router.post("/", handleCreateNewUser)
 
 //app.get(URL, FUNCTION)
 // app.get('/api/users',(req,res)=>{
@@ -59,16 +94,8 @@ router.post("/", async (req, res) => {
 //    return res.send(html);
 // });
 
-router.patch('/:id', async(req, res) => {
-   await User.findByIdAndUpdate(req.params.id,{email:"changed"});
-   return res.json({message: "Updated"});
-});
 
-router.delete('/:id', async(req, res) => {
-   await User.findByIdAndDelete(req.params.id);
-   return res.json({message: "deleted"});
 
-});
 // app.get('/users', (req, res) => {
 //    const html = `<ul>
 //       ${users.map((user) => `<li>${user.name}</li>`).join("")}
@@ -78,13 +105,6 @@ router.delete('/:id', async(req, res) => {
 // });
 
 
-
-router.get('/',(req, res) => {
-   const id = Number(req.params.id);
-   const user = users.find((user) => user.id === id);
-   return res.json(user);
-}
-   );
 
 // app.post('/api/users/:id', (req,res)=>{
 //    return res.json({message: "POST request received"});
